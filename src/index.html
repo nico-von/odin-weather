@@ -1,17 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Odin Weather</title>
 </head>
-<body>
-   <main>
-    <div id="current"></div>
-    <div id="forecast"></div>
-   </main>
-   <footer>
 
-   </footer> 
+<body>
+    <main>
+        <div id="current">
+            <div class="weather-card">
+                <div class="weather-essentials">
+                    <h3 id="weather-type"></h3>
+                    <h4 id="weather-location"></h4>
+                    <h4 id="weather-date"></h4>
+                    <h3 id="weather-temp"></h3>
+                </div>
+                <div class="display-type-container">
+                    <h5 id="display-type"></h5>
+                </div>
+                <div id="weather-icon"></div>
+                <div id="search-location-container">
+                    <form class="search-location-form">
+                        <div class="search-location">
+                            <input type="text" placeholder="Search Location..." id="search-textbox">
+                            <button id="search-button">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div id="forecast">
+            
+        </div>
+    </main>
+    <footer>
+
+    </footer>
 </body>
+
 </html>
