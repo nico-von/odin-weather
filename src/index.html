@@ -18,14 +18,15 @@
                     <h3 id="weather-temp"></h3>
                 </div>
                 <div class="display-type-container">
-                    <h5 id="display-type"></h5>
+                    <h5 id="display-type-celcius">C°</h5>
+                    <h5 id="display-type-fah">F°</h5>
                 </div>
                 <div id="weather-icon"></div>
                 <div id="search-location-container">
                     <form class="search-location-form">
                         <div class="search-location">
                             <input type="text" placeholder="Search Location..." id="search-textbox">
-                            <button id="search-button">Search</button>
+                            <input type="submit" id="search-button">Search</button>
                         </div>
                     </form>
                 </div>
@@ -67,7 +68,7 @@
                     <div id="daily-forecast">Daily</div>
                     <div id="hourly-forecast">Hourly</div>
                 </div>
-                <div class="forecast-content">
+                <div class="forecast-content" id="forecast-content">
                 </div>
             </div>
     </main>
