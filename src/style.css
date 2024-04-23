@@ -1,5 +1,46 @@
 :root {
     box-sizing: border-box;
+}
+
+body {
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+}
+
+main {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#current {
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+}
+
+.weather-card,
+.weather-details {
+    display: flex;
+    flex-direction: column;
+}
+
+#forecast {
+    display: flex;
+    flex-direction: column;
+}
+
+.forecast-buttons {
+    display: flex;
+    gap: 1rem;
+}
+.forecast-content {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
