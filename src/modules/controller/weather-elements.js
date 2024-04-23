@@ -1,8 +1,9 @@
 export const weatherCard = {
     weatherType: document.querySelector("#weather-type"),
+    weatherTypeIcon: document.querySelector("#weather-type-icon"),
     weatherLocation: document.querySelector("#weather-location"),
     weatherDate: document.querySelector("#weather-date"),
-    weatherTemp: document.querySelector("#weather-temp")
+    weatherTemp: document.querySelector("#weather-temp"),
 }
 
 export const weatherCardBtns = {

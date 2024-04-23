@@ -1,3 +1,4 @@
+import { Weather } from "../model/weather";
 function getUrl(base, endpoint, key, q, days ) {
     const url = new URL(`${base}/${endpoint}?`);
     const params = new URLSearchParams({key, q});
@@ -10,5 +11,41 @@ export async function getWeather(base, endpoint, key, q){
     const response = await fetch(url);
     //temporary
     const data = await response.json();
-    return data;
+    const weatherObj = await createWeatherObject(data);
+    return weatherObj;
+}
+
+async function createWeatherObject(data) {
+    const {location, 
+        current, 
+        feelslike_c, 
+        feelslike_f, 
+        humidity,
+        precip_in,
+        wind_kph
+    } = data;
+    const { name, localtime } = location;
+    const {temp_c, temp_f, condition} = current;
+    const {text, icon } = condition;
+    
+    const ltsplit = localtime.split(" ");
+    const date = ltsplit[0];
+    const time = ltsplit[1];
+
+    const weatherObject = new Weather(
+        name,
+        date,
+        time,
+        temp_c,
+        temp_f,
+        text,
+        icon,
+        feelslike_c,
+        feelslike_f,
+        humidity,
+        precip_in,
+        wind_kph,
+    )
+
+    return weatherObject;
 }
