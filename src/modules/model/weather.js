@@ -3,22 +3,24 @@ export class Weather {
         location,
         date,
         time,
-        currentTemp,
-        highTemp,
-        lowTemp,
+        currentTempF,
+        currentTempC,
         type,
-        heatIndex,
+        icon,
+        heatIndexC,
+        heatIndexF,
         humidity,
         rainChance,
         windSpeed) {
         this.locaton = location;
         this.date = date;
         this.time = time;
-        this.currentTemp = currentTemp;
-        this.highTemp = highTemp;
-        this.lowTemp = lowTemp;
+        this.currentTempC = currentTempC;
+        this.currentTempF = currentTempF;
         this.type = type;
-        this.heatIndex = heatIndex;
+        this.icon = icon;
+        this.heatIndexC = heatIndexC;
+        this.heatIndexF = heatIndexF;
         this.humidity = humidity;
         this.rainChance = rainChance;
         this.windSpeed = windSpeed;
