@@ -7,3 +7,8 @@ export function celciusClickHandler(e, location) {
 export function fahClickHandler (e, location) {
     loadWeather(location, false);
 }
+
+export function searchHandler(e, location, isCelcius) {
+    e.preventDefault();
+    loadWeather(location, isCelcius);
+}

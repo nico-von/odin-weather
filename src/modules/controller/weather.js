@@ -7,10 +7,11 @@ import {
     weatherDetails,
     forecastElements
 } from "./weather-elements";
-import { celciusClickHandler, fahClickHandler } from "./elementHandlers";
+import { celciusClickHandler, fahClickHandler, searchHandler } from "./elementHandlers";
 
 export async function loadWeather(location, isCelcius) {
-    const weatherObject = await getWeather(BASE_URL, CURRENT_WEATHER_ENDPOINT, KEY, location);
+    let weatherObject = await getWeather(BASE_URL, CURRENT_WEATHER_ENDPOINT, KEY, location);
+    if (!weatherObject) return;
     const {
         weatherType,
         weatherTypeIcon,
@@ -47,7 +48,7 @@ export function initialiseApp(location, isCelcius){
     loadWeather(location, isCelcius);
 }
 
-function initialiseBtns(location) {
+function initialiseBtns(location, isCelcius) {
     const {
         celciusBtn, 
         fahBtn, 
@@ -58,6 +59,20 @@ function initialiseBtns(location) {
         dailyBtn, 
         hourlyBtn
     } = forecastElements;
-    celciusBtn.addEventListener('click', e => {celciusClickHandler(e, location)});
-    fahBtn.addEventListener('click', e => { fahClickHandler(e, location)});
+
+    let celciusState = isCelcius;
+    let locationState = location;
+    
+    celciusBtn.addEventListener('click', e => {
+        celciusClickHandler(e, locationState);
+        celciusState = true;
+    });
+    fahBtn.addEventListener('click', e => { 
+        fahClickHandler(e, locationState);
+        celciusState = false;
+    });
+    searchBtn.addEventListener('click', e => {
+        locationState = searchInput.value;
+        searchHandler(e, locationState, celciusState);
+    });
 }

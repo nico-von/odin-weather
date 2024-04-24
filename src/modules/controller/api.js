@@ -9,7 +9,7 @@ function getUrl(base, endpoint, key, q, days ) {
 export async function getWeather(base, endpoint, key, q){   
     const url = getUrl(base, endpoint,key,q)
     const response = await fetch(url);
-    //temporary
+    if (!response.ok) return;
     const data = await response.json();
     const weatherObj = await createWeatherObject(data);
     return weatherObj;
@@ -27,7 +27,6 @@ async function createWeatherObject(data) {
         precip_in,
         wind_kph} = current;
     const {text, icon } = condition;
-    
     const ltsplit = localtime.split(" ");
     const date = ltsplit[0];
     const time = ltsplit[1];
