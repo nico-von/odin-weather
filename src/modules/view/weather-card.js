@@ -6,7 +6,6 @@ export function setWeatherCard(
     weatherLocation,
     weatherDate,
     weatherTemp) {
-
     const { type, icon, location, date, currentTempC, currentTempF } = weatherObj;
     weatherType.textContent = type;
     weatherTypeIcon.src = icon;
@@ -19,14 +18,14 @@ export function setWeatherCard(
 export function setWeatherDetails(
     isCelcius,
     weatherObj,
-    feelsLike,
-    humidity,
-    rainChance,
-    windSpeed
+    feelsLikeE,
+    humidityE,
+    rainChanceE,
+    windSpeedE
 ) {
     const { heatIndexC, heatIndexF, humidity, rainChance, windSpeed } = weatherObj;
-    feelsLike.textContent = isCelcius ? heatIndexC : heatIndexF;
-    humidity.textContent = humidity;
-    rainChance.textContent = rainChance;
-    windSpeed.textContent = windSpeed;
+    feelsLikeE.textContent = isCelcius ? heatIndexC : heatIndexF;
+    humidityE.textContent = humidity;
+    rainChanceE.textContent = rainChance;
+    windSpeedE.textContent = windSpeed;
 }

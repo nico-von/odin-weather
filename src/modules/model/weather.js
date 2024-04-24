@@ -12,7 +12,7 @@ export class Weather {
         humidity,
         rainChance,
         windSpeed) {
-        this.locaton = location;
+        this.location = location;
         this.date = date;
         this.time = time;
         this.currentTempC = currentTempC;

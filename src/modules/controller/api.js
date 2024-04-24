@@ -17,27 +17,26 @@ export async function getWeather(base, endpoint, key, q){
 
 async function createWeatherObject(data) {
     const {location, 
-        current, 
+        current
+    } = data;
+    const { name, localtime } = location;
+    const {temp_c, temp_f, condition,
         feelslike_c, 
         feelslike_f, 
         humidity,
         precip_in,
-        wind_kph
-    } = data;
-    const { name, localtime } = location;
-    const {temp_c, temp_f, condition} = current;
+        wind_kph} = current;
     const {text, icon } = condition;
     
     const ltsplit = localtime.split(" ");
     const date = ltsplit[0];
     const time = ltsplit[1];
-
     const weatherObject = new Weather(
         name,
         date,
         time,
-        temp_c,
         temp_f,
+        temp_c,
         text,
         icon,
         feelslike_c,
@@ -46,6 +45,5 @@ async function createWeatherObject(data) {
         precip_in,
         wind_kph,
     )
-
     return weatherObject;
 }
