@@ -7,7 +7,7 @@ import {
     weatherDetails,
     forecastElements
 } from "./weather-elements";
-import { tempClickHandler, searchHandler } from "./elementHandlers";
+import { clickHandler } from "./elementHandlers";
 import { createDayCard, createHourCard } from "../view/forecast-cards";
 
 export async function loadWeather(location, isCelcius) {
@@ -51,6 +51,7 @@ export async function loadForecast(location, isCelcius, isDay, days){
     const {forecastContent} = forecastElements;
     const forecastObject = await createForecastObject(data);
     const {forecastDays, forecastHours} = forecastObject;
+    console.log(forecastHours)
     forecastContent.replaceChildren();
     if (isDay) {
         for (let d of forecastDays){
@@ -64,7 +65,8 @@ export async function loadForecast(location, isCelcius, isDay, days){
             forecastContent.appendChild(dayCard);
         }
     } else {
-        for (let h of forecastHours) {
+        for (let [index, h] of forecastHours.entries()) {
+            if (index === days) break;
             const {hour, tempC, tempF, type, icon} = h;
             const hourCard = createHourCard(
                 hour,
@@ -104,14 +106,22 @@ function initialiseBtns(settings) {
     
     celciusBtn.addEventListener('click', e => {
         settings.celciusState = true;
-        tempClickHandler(e, settings);
+        clickHandler(e, settings);
     });
     fahBtn.addEventListener('click', e => { 
         settings.celciusState = false;
-        tempClickHandler(e, settings);
+        clickHandler(e, settings);
     });
     searchBtn.addEventListener('click', e => {
         settings.locationState = searchInput.value;
-        searchHandler(e, settings);
+        clickHandler(e, settings);
     });
+    dailyBtn.addEventListener('click', e => {
+        settings.dayState = true;
+        clickHandler(e, settings);
+    })
+    hourlyBtn.addEventListener('click', e => {
+        settings.dayState = false;
+        clickHandler(e, settings);
+    })
 }

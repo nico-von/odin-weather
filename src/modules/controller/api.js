@@ -28,7 +28,7 @@ export async function createForecastObject(data) {
             const { hour } = fday;
             for (const h in hour) {
                 const forecastHour = getHourData(hour[h]);
-                forecastHours.push = forecastHour;
+                forecastHours.push(forecastHour);
             }
         }
     }

@@ -1,21 +1,6 @@
 import { loadForecast, loadWeather } from "./weather";
 
-export function tempClickHandler(e, settings) {
-    const {
-        locationState,
-        celciusState,
-        dayState,
-        daysNumberState } = settings;
-    loadWeather(locationState, celciusState);
-    loadForecast(
-        locationState,
-        celciusState,
-        dayState,
-        daysNumberState
-    )
-}
-
-export function searchHandler(e, settings) {
+export function clickHandler(e, settings) {
     e.preventDefault();
     const {
         locationState,
@@ -28,5 +13,5 @@ export function searchHandler(e, settings) {
         celciusState,
         dayState,
         daysNumberState
-    );
+    )
 }
