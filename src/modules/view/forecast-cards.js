@@ -1,13 +1,14 @@
-export function createDayCard(dayText, highText, lowText, typeSvg) {
+export function createDayCard(dayText, highText, lowText, typeTxt, typeIconUrl) {
     const dayCard = document.createElement("div");
     dayCard.classList.add("card");
 
     const day = document.createElement("div");
-    dayText.classList.add("card-title");
+    day.classList.add("card-title");
     day.textContent = dayText;
 
     const temp = document.createElement("div");
     temp.classList.add("card-temp");
+
     const high = document.createElement("div");
     high.textContent = highText;
 
@@ -18,13 +19,19 @@ export function createDayCard(dayText, highText, lowText, typeSvg) {
 
     const type = document.createElement("div");
     type.classList.add("card-type")
-    type.appendChild(typeSvg);
+    
+    const typeIcon = document.createElement("img");
+    typeIcon.classList.add("weather-icon");
+    typeIcon.src = typeIconUrl;
+    typeIcon.alt = typeTxt;
 
-    dayCard.append(day, temptype, type);
+    type.appendChild(typeIcon);
+
+    dayCard.append(day, temp, type);
     return dayCard;
 }
 
-export function createHourCard(hourText, tempText, typeSvg) {
+export function createHourCard(hourText, tempText, typeTxt, typeIconUrl) {
     const hourCard = document.createElement("div");
     hourCard.classList.add("card");
 
@@ -38,7 +45,13 @@ export function createHourCard(hourText, tempText, typeSvg) {
 
     const type = document.createElement("div");
     type.classList.add("card-type")
-    type.appendChild(typeSvg);
+    
+    const typeIcon = document.createElement("img");
+    typeIcon.classList.add("weather-icon");
+    typeIcon.src = typeIconUrl;
+    typeIcon.alt = typeTxt;
+
+    type.appendChild(typeIcon);
 
     hourCard.append(hour, temp, type);
     return hourCard;

@@ -1,14 +1,32 @@
-import { loadWeather } from "./weather";
+import { loadForecast, loadWeather } from "./weather";
 
-export function celciusClickHandler(e, location) {
-    loadWeather(location, true);
+export function tempClickHandler(e, settings) {
+    const {
+        locationState,
+        celciusState,
+        dayState,
+        daysNumberState } = settings;
+    loadWeather(locationState, celciusState);
+    loadForecast(
+        locationState,
+        celciusState,
+        dayState,
+        daysNumberState
+    )
 }
 
-export function fahClickHandler (e, location) {
-    loadWeather(location, false);
-}
-
-export function searchHandler(e, location, isCelcius) {
+export function searchHandler(e, settings) {
     e.preventDefault();
-    loadWeather(location, isCelcius);
+    const {
+        locationState,
+        celciusState,
+        dayState,
+        daysNumberState } = settings;
+    loadWeather(locationState, celciusState);
+    loadForecast(
+        locationState,
+        celciusState,
+        dayState,
+        daysNumberState
+    );
 }

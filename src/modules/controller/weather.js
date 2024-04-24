@@ -7,7 +7,8 @@ import {
     weatherDetails,
     forecastElements
 } from "./weather-elements";
-import { celciusClickHandler, fahClickHandler, searchHandler } from "./elementHandlers";
+import { tempClickHandler, searchHandler } from "./elementHandlers";
+import { createDayCard, createHourCard } from "../view/forecast-cards";
 
 export async function loadWeather(location, isCelcius) {
     let data = await getWeather(BASE_URL, CURRENT_WEATHER_ENDPOINT, KEY, location);
@@ -44,19 +45,51 @@ export async function loadWeather(location, isCelcius) {
     );
 }
 
-export async function loadForecast(location, isCelcius, days){
+export async function loadForecast(location, isCelcius, isDay, days){
     let data = await getWeather(BASE_URL, FORECAST_ENDPOINT, KEY, location, days);
     if (!data) return;
+    const {forecastContent} = forecastElements;
     const forecastObject = await createForecastObject(data);
+    const {forecastDays, forecastHours} = forecastObject;
+    forecastContent.replaceChildren();
+    if (isDay) {
+        for (let d of forecastDays){
+            const {day, highC, lowC, highF, lowF, type, icon} = d;
+            const dayCard = createDayCard(
+                day, 
+                isCelcius ? highC : highF, 
+                isCelcius ? lowC : lowF,
+                type,
+                icon )
+            forecastContent.appendChild(dayCard);
+        }
+    } else {
+        for (let h of forecastHours) {
+            const {hour, tempC, tempF, type, icon} = h;
+            const hourCard = createHourCard(
+                hour,
+                isCelcius? tempC : tempF,
+                type,
+                icon
+            )
+            forecastContent.appendChild(hourCard);
+        }
+    }
 }
 
-export function initialiseApp(location, isCelcius, days){
-    initialiseBtns(location, isCelcius);
+export function initialiseApp(location, isCelcius, isDay, days){
+    const settings = {
+        celciusState: isCelcius,
+        locationState: location,
+        dayState: isDay,
+        daysNumberState: days
+    }
+    initialiseBtns(settings);
     loadWeather(location, isCelcius);
-    loadForecast(location, isCelcius, days);
+    loadForecast(location, isCelcius, isDay, days);
 }
 
-function initialiseBtns(location, isCelcius) {
+function initialiseBtns(settings) {
     const {
         celciusBtn, 
         fahBtn, 
@@ -67,20 +100,18 @@ function initialiseBtns(location, isCelcius) {
         dailyBtn, 
         hourlyBtn
     } = forecastElements;
-
-    let celciusState = isCelcius;
-    let locationState = location;
+    
     
     celciusBtn.addEventListener('click', e => {
-        celciusClickHandler(e, locationState);
-        celciusState = true;
+        settings.celciusState = true;
+        tempClickHandler(e, settings);
     });
     fahBtn.addEventListener('click', e => { 
-        fahClickHandler(e, locationState);
-        celciusState = false;
+        settings.celciusState = false;
+        tempClickHandler(e, settings);
     });
     searchBtn.addEventListener('click', e => {
-        locationState = searchInput.value;
-        searchHandler(e, locationState, celciusState);
+        settings.locationState = searchInput.value;
+        searchHandler(e, settings);
     });
 }
