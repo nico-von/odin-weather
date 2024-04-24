@@ -1,3 +1,4 @@
+import { ForecastDay, ForecastHour } from "../model/forecast";
 import { Weather } from "../model/weather";
 function getUrl(base, endpoint, key, q, days ) {
     const url = new URL(`${base}/${endpoint}?`);
@@ -6,16 +7,57 @@ function getUrl(base, endpoint, key, q, days ) {
     return url + params;
 }
 
-export async function getWeather(base, endpoint, key, q){   
-    const url = getUrl(base, endpoint,key,q)
+export async function getWeather(base, endpoint, key, q, days = null){   
+    const url = getUrl(base, endpoint,key,q,days)
     const response = await fetch(url);
     if (!response.ok) return;
-    const data = await response.json();
-    const weatherObj = await createWeatherObject(data);
-    return weatherObj;
+    return await response.json();
+    
+    
 }
 
-async function createWeatherObject(data) {
+export async function createForecastObject(data) {
+    const { forecast } = data;
+    const forecastDays = [];
+    const forecastHours = [];
+    for (const [index, fday] of forecast.forecastday.entries()) {
+        const {date, day} = fday;
+        const forecastDay = getDayData(date, day);
+        forecastDays.push(forecastDay);
+        if (index === 0){
+            const { hour } = fday;
+            for (const h in hour) {
+                const forecastHour = getHourData(hour[h]);
+                forecastHours.push = forecastHour;
+            }
+        }
+    }
+    return {
+        forecastDays,
+        forecastHours
+    }
+    
+}
+
+function getHourData(h) {
+    const {time, temp_c, temp_f, condition} = h;
+    const hour = time.split(" ")[1];
+    const {text, icon} = condition;
+    return new ForecastHour(
+        hour,
+        temp_c,
+        temp_f,
+        text,
+        icon
+    )
+}
+
+function getDayData(date, day) {
+    const {maxtemp_c, mintemp_c, maxtemp_f, mintemp_f, condition} = day;
+    const {text, icon} = condition;
+    return new ForecastDay(date, maxtemp_c, mintemp_c, maxtemp_f, mintemp_f, text, icon);
+}
+export async function createWeatherObject(data) {
     const {location, 
         current
     } = data;

@@ -1,5 +1,5 @@
-import { BASE_URL, KEY, CURRENT_WEATHER_ENDPOINT } from "../weather-api-creds";
-import { getWeather } from "./api";
+import { BASE_URL, KEY, CURRENT_WEATHER_ENDPOINT, FORECAST_ENDPOINT } from "../weather-api-creds";
+import { createForecastObject, createWeatherObject, getWeather } from "./api";
 import { setWeatherCard, setWeatherDetails } from "../view/weather-card";
 import {
     weatherCard,
@@ -10,8 +10,9 @@ import {
 import { celciusClickHandler, fahClickHandler, searchHandler } from "./elementHandlers";
 
 export async function loadWeather(location, isCelcius) {
-    let weatherObject = await getWeather(BASE_URL, CURRENT_WEATHER_ENDPOINT, KEY, location);
-    if (!weatherObject) return;
+    let data = await getWeather(BASE_URL, CURRENT_WEATHER_ENDPOINT, KEY, location);
+    if (!data) return;
+    const weatherObject = await createWeatherObject(data);
     const {
         weatherType,
         weatherTypeIcon,
@@ -43,9 +44,16 @@ export async function loadWeather(location, isCelcius) {
     );
 }
 
-export function initialiseApp(location, isCelcius){
-    initialiseBtns(location);
+export async function loadForecast(location, isCelcius, days){
+    let data = await getWeather(BASE_URL, FORECAST_ENDPOINT, KEY, location, days);
+    if (!data) return;
+    const forecastObject = await createForecastObject(data);
+}
+
+export function initialiseApp(location, isCelcius, days){
+    initialiseBtns(location, isCelcius);
     loadWeather(location, isCelcius);
+    loadForecast(location, isCelcius, days);
 }
 
 function initialiseBtns(location, isCelcius) {
