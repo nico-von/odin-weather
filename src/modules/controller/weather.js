@@ -51,15 +51,17 @@ export async function loadForecast(location, isCelcius, isDay, days){
     const {forecastContent} = forecastElements;
     const forecastObject = await createForecastObject(data);
     const {forecastDays, forecastHours} = forecastObject;
-    console.log(forecastHours)
     forecastContent.replaceChildren();
     if (isDay) {
         for (let d of forecastDays){
             const {day, highC, lowC, highF, lowF, type, icon} = d;
             const dayCard = createDayCard(
                 day, 
-                isCelcius ? highC : highF, 
-                isCelcius ? lowC : lowF,
+                isCelcius,
+                highC,
+                highF, 
+                lowC,
+                lowF,
                 type,
                 icon )
             forecastContent.appendChild(dayCard);
@@ -70,7 +72,9 @@ export async function loadForecast(location, isCelcius, isDay, days){
             const {hour, tempC, tempF, type, icon} = h;
             const hourCard = createHourCard(
                 hour,
-                isCelcius? tempC : tempF,
+                isCelcius,
+                tempC,
+                tempF,
                 type,
                 icon
             )

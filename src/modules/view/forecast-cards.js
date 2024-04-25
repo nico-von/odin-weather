@@ -1,4 +1,4 @@
-export function createDayCard(dayText, highText, lowText, typeTxt, typeIconUrl) {
+export function createDayCard(dayText, isCelcius, highCText, highFText, lowCText, lowFText, typeTxt, typeIconUrl) {
     const dayCard = document.createElement("div");
     dayCard.classList.add("card");
 
@@ -10,10 +10,10 @@ export function createDayCard(dayText, highText, lowText, typeTxt, typeIconUrl) 
     temp.classList.add("card-temp");
 
     const high = document.createElement("div");
-    high.textContent = highText;
+    high.textContent = isCelcius ? `${highCText} °C` : `${highFText} °F`;
 
     const low = document.createElement("div");
-    low.textContent = lowText;
+    low.textContent = isCelcius ? `${lowCText} °C` : `${lowFText} °F`;
 
     temp.append(high, low);
 
@@ -31,7 +31,7 @@ export function createDayCard(dayText, highText, lowText, typeTxt, typeIconUrl) 
     return dayCard;
 }
 
-export function createHourCard(hourText, tempText, typeTxt, typeIconUrl) {
+export function createHourCard(hourText, isCelcius, tempCText, tempFText, typeTxt, typeIconUrl) {
     const hourCard = document.createElement("div");
     hourCard.classList.add("card");
 
@@ -41,7 +41,7 @@ export function createHourCard(hourText, tempText, typeTxt, typeIconUrl) {
 
     const temp = document.createElement("div");
     temp.classList.add("card-temp");
-    temp.textContent = tempText;
+    temp.textContent = isCelcius ? `${tempCText} °C` : `${tempFText} °F`;
 
     const type = document.createElement("div");
     type.classList.add("card-type")
