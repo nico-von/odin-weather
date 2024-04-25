@@ -7,7 +7,7 @@ import {
     weatherDetails,
     forecastElements
 } from "./weather-elements";
-import { clickHandler } from "./elementHandlers";
+import { celciusBtnHandler, clickHandler } from "./elementHandlers";
 import { createDayCard, createHourCard } from "../view/forecast-cards";
 
 export async function loadWeather(location, isCelcius) {
@@ -19,6 +19,7 @@ export async function loadWeather(location, isCelcius) {
         weatherTypeIcon,
         weatherLocation,
         weatherDate,
+        weatherTime,
         weatherTemp } = weatherCard;
     const {
         feelsLike,
@@ -34,6 +35,7 @@ export async function loadWeather(location, isCelcius) {
         weatherTypeIcon,
         weatherLocation,
         weatherDate,
+        weatherTime,
         weatherTemp);
     setWeatherDetails(
         isCelcius,
@@ -98,7 +100,6 @@ export function initialiseApp(location, isCelcius, isDay, days){
 function initialiseBtns(settings) {
     const {
         celciusBtn, 
-        fahBtn, 
         searchInput, 
         searchBtn
     } = weatherCardBtns;
@@ -109,12 +110,8 @@ function initialiseBtns(settings) {
     
     
     celciusBtn.addEventListener('click', e => {
-        settings.celciusState = true;
-        clickHandler(e, settings);
-    });
-    fahBtn.addEventListener('click', e => { 
-        settings.celciusState = false;
-        clickHandler(e, settings);
+        settings.celciusState = !settings.celciusState;
+        celciusBtnHandler(e, settings, celciusBtn);
     });
     searchBtn.addEventListener('click', e => {
         settings.locationState = searchInput.value;

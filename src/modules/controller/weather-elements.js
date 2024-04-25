@@ -3,12 +3,12 @@ export const weatherCard = {
     weatherTypeIcon: document.querySelector("#weather-type-icon"),
     weatherLocation: document.querySelector("#weather-location"),
     weatherDate: document.querySelector("#weather-date"),
+    weatherTime: document.querySelector("#weather-time"),
     weatherTemp: document.querySelector("#weather-temp"),
 }
 
 export const weatherCardBtns = {
-    celciusBtn: document.querySelector("#display-type-celcius"),
-    fahBtn: document.querySelector("#display-type-fah"),
+    celciusBtn: document.querySelector("#display-type"),
     searchInput: document.querySelector("#search-textbox"),
     searchBtn: document.querySelector("#search-button")
 }

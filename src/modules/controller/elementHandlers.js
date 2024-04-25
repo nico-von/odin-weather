@@ -15,3 +15,9 @@ export function clickHandler(e, settings) {
         daysNumberState
     )
 }
+
+export function celciusBtnHandler(e, settings, celciusBtn) {
+    clickHandler(e, settings);
+    celciusBtn.textContent = settings.celciusState ? '°C' : '°F';
+    
+}

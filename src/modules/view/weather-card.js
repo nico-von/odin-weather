@@ -5,12 +5,14 @@ export function setWeatherCard(
     weatherTypeIcon,
     weatherLocation,
     weatherDate,
+    weatherTime,
     weatherTemp) {
-    const { type, icon, location, date, currentTempC, currentTempF } = weatherObj;
+    const { type, icon, location, date, time, currentTempC, currentTempF } = weatherObj;
     weatherType.textContent = type;
     weatherTypeIcon.src = icon;
     weatherLocation.textContent = location;
     weatherDate.textContent = date;
+    weatherTime.textContent = time;
     weatherTemp.textContent = isCelcius ? `${currentTempC} °C` : `${currentTempF} °F`;
 }
 
