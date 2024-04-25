@@ -21,3 +21,14 @@ export function celciusBtnHandler(e, settings, celciusBtn) {
     celciusBtn.textContent = settings.celciusState ? '°C' : '°F';
     
 }
+
+export function selectedHandler(settings, dailyBtn, hourlyBtn) {
+    if (settings.dayState){
+        dailyBtn.classList.add("selected");
+        hourlyBtn.classList.remove("selected");
+    }
+    else {
+        dailyBtn.classList.remove("selected");
+        hourlyBtn.classList.add("selected");
+    }
+}

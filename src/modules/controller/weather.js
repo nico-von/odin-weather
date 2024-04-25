@@ -7,8 +7,9 @@ import {
     weatherDetails,
     forecastElements
 } from "./weather-elements";
-import { celciusBtnHandler, clickHandler } from "./elementHandlers";
+import { celciusBtnHandler, clickHandler, selectedHandler } from "./elementHandlers";
 import { createDayCard, createHourCard } from "../view/forecast-cards";
+import Search from "../icons/search-icon.svg";
 
 export async function loadWeather(location, isCelcius) {
     let data = await getWeather(BASE_URL, CURRENT_WEATHER_ENDPOINT, KEY, location);
@@ -108,11 +109,20 @@ function initialiseBtns(settings) {
         hourlyBtn
     } = forecastElements;
     
-    
+    // add Image and CSS
+    searchBtn.src = Search;
+    selectedHandler(settings, dailyBtn, hourlyBtn);
+
     celciusBtn.addEventListener('click', e => {
         settings.celciusState = !settings.celciusState;
         celciusBtnHandler(e, settings, celciusBtn);
     });
+    searchInput.addEventListener('keydown', e => {
+        if (e.key === "Enter"){
+            settings.locationState = searchInput.value;
+            clickHandler(e, settings);
+        }
+    })
     searchBtn.addEventListener('click', e => {
         settings.locationState = searchInput.value;
         clickHandler(e, settings);
@@ -120,9 +130,11 @@ function initialiseBtns(settings) {
     dailyBtn.addEventListener('click', e => {
         settings.dayState = true;
         clickHandler(e, settings);
+        selectedHandler(settings, dailyBtn, hourlyBtn);
     })
     hourlyBtn.addEventListener('click', e => {
         settings.dayState = false;
         clickHandler(e, settings);
+        selectedHandler(settings, dailyBtn, hourlyBtn);
     })
 }

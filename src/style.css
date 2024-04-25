@@ -5,7 +5,7 @@
     font-style: normal;
 }
 
-h3, h4 {
+h2, h3, h4, h5, img, input {
     padding: 0;
     margin: 0;
 }
@@ -17,6 +17,9 @@ body {
     flex-direction: column;
     justify-content: space-between;
     min-height: 100vh;
+    background-image: url(./modules/icons/background-static.jpg);
+    background-color: rgba(240, 255, 255, 0.678);
+    background-size: cover;
 }
 
 main {
@@ -39,6 +42,10 @@ main {
     flex-direction: column;
 }
 
+.weather-details {
+    gap: 1.5rem;
+}
+
 #forecast {
     display: flex;
     flex-direction: column;
@@ -47,6 +54,7 @@ main {
 .forecast-buttons {
     display: flex;
     gap: 1rem;
+    padding: 1rem 0;
 }
 .forecast-content {
     display: grid;
@@ -71,5 +79,115 @@ main {
 }
 
 #weather-temp {
+    margin-top: 4rem;
     font-size: 4rem;
+}
+
+#weather-type-icon {
+    height: auto;
+    width: 80px;
+}
+
+#display-type::before {
+    content: "Display "
+}
+#display-type:hover {
+    cursor: pointer;
+    color: rgb(56, 56, 56);
+}
+
+#display-type {
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+#search-location-container {
+    margin: 1rem 0rem;
+}
+
+.search-location{
+    border-bottom: solid;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+}
+
+::placeholder{
+    color: rgb(0, 0, 0);
+}
+
+#search-textbox,
+#search-button {
+    border: none;
+    background-color: transparent;
+    font-size: 1rem;
+}
+
+#search-textbox:focus {
+    outline: none;
+}
+
+#search-button {
+    cursor: pointer;
+}
+
+.weather-detail-title {
+    font-size: 1rem;
+}
+
+.weather-detail-value {
+    font-size: 2rem;
+}
+
+.forecast-button {
+    font-size: 1.5rem;
+    font-weight: 500;
+    border: solid;
+    border-color: transparent; 
+    border-radius: 10px;
+    padding: 0 1rem;
+    font-weight: 400;
+}
+
+.forecast-button:hover{
+    cursor: pointer;
+}
+
+.selected {
+    border-color: black;
+    background-color: rgba(255, 255, 255, 0.534);
+    color: black;
+    font-weight: 600;
+}
+
+#forecast-content {
+    margin-top: 2rem;
+}
+
+.card-title {
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+
+.card-temp {
+    margin-top: 1rem;
+    font-size: 1.1rem;
+}
+.high-temp {
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+.low-temp {
+ 
+   font-weight: 300;
+}
+.card-type {
+    margin-top: 1rem;
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0;
 }

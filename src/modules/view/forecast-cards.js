@@ -10,11 +10,12 @@ export function createDayCard(dayText, isCelcius, highCText, highFText, lowCText
     temp.classList.add("card-temp");
 
     const high = document.createElement("div");
+    high.classList.add("high-temp");
     high.textContent = isCelcius ? `${highCText} °C` : `${highFText} °F`;
 
     const low = document.createElement("div");
     low.textContent = isCelcius ? `${lowCText} °C` : `${lowFText} °F`;
-
+    low.classList.add("low-temp");
     temp.append(high, low);
 
     const type = document.createElement("div");

@@ -1,4 +1,4 @@
-const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
 export class ForecastDay {
     constructor(date, highC, lowC, highF, lowF, type, icon) {
